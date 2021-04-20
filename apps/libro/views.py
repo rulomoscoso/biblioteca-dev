@@ -20,24 +20,34 @@ class CrearAutor(CreateView):
 	success_url = reverse_lazy ('libro:listar_autor')
 
 
-class ListadoAutor(ListView):
+class ListadoAutor(View):
 	model = Autor
+	form_class = AutorForm
 	template_name = 'libro/autor/lista_autores.html'
-	context_object_name = 'autores'
-	queryset = Autor.objects.filter(status = True)
 
-	"""def get(self, request, *args, **kwargs):
-		if request.user.is_authenticated:
-			return render(self.template_name)
-		else:
-			return redirect('login')"""
+	def get_queryset(self):
+		return self.model.objects.filter(status=True)
+
+	def get_context_data(self, *args, **kwargs):
+		contexto = {}
+		contexto['autores'] = self.get_queryset()
+		contexto['form'] = self.form_class
+		return contexto
+
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, self.get_context_data())
 
 
 class ActualizarAutor(UpdateView):
 	model = Autor
-	template_name = 'libro/autor/crear_autor.html'
+	template_name = 'libro/autor/autor.html'
 	form_class = AutorForm
 	success_url = reverse_lazy('libro:listar_autor')
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['autores'] = Autor.objects.filter(status=True)
+		return context
 
 
 class EliminarAutor(DeleteView):

@@ -32,7 +32,7 @@
                         <td>{{ autor.nacionalidad }}</td>
                         <td>{{ autor.descripcion }}</td>
                         <td>
-                          <a href="{% url 'libro:editar_autor' autor.id %}" class="btn btn-primary">Editar</a>
+                          <button onclick="abrir_modal_edicion('{% url 'libro:editar_autor' autor.pk %}')" class="btn btn-primary">Editar</button>
                           <a href="{% url 'libro:eliminar_autor' autor.id %}" class="btn btn-danger">Eliminar</a>
                         </td>
                       </tr>
@@ -41,8 +41,26 @@
               </table>
           </div>
       </div>
-      {% else %}
-        <h1>No existen autores registrados</h1>
-      {% endif %}
+  {% else %}
+    <h1>No existen autores registrados</h1>
+  {% endif %}
+
+  <div class="modal fade" id="edicion" role="dialog">
+        
+  </div>
 
 {% endblock body %}
+
+{% block extrajs %}
+
+  <script type="text/javascript">
+    $ = jQuery.noConflict()
+    function abrir_modal_edicion(url){
+      $('#edicion').load(url, function(){
+        $(this).modal('show');
+      });
+    }
+  </script>
+  
+
+{% endblock extrajs %}
