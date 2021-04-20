@@ -69,22 +69,22 @@ class ListadoLibro(View):
 	def get(self, request, *args, **kwargs):
 		return render(request, self.template_name, self.get_context_data() )
 
-	def post(self, request, *args, **kwargs):
+	"""def post(self, request, *args, **kwargs):
 		form = self.form_class(request.POST)
 		if form.is_valid():
 			form.save()
-			return redirect('libro:listado_libros')
+			return redirect('libro:listado_libros')"""
 
 
-"""class CrearLibro(CreateView):
+class CrearLibro(CreateView):
 	model = Libro
 	form_class = LibroForm
 	template_name = 'libro/libro/crear_libro.html'
-	success_url = reverse_lazy('libro:listado_libros')"""
+	success_url = reverse_lazy('libro:listado_libros')
 
 class ActualizarLibro(UpdateView):
 	model = Libro
-	template_name = 'libro/libro/listar_libros.html'
+	template_name = 'libro/libro/libro.html'
 	form_class = LibroForm
 	success_url = reverse_lazy('libro:listado_libros')
 
