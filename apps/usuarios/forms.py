@@ -65,4 +65,19 @@ class FormularioUsuario(forms.ModelForm):
 						'placeholder' : 'Ingrese su nombre de usuario'
 					}
 				)
-		}	
+		}
+
+	def clean_password2(self):
+		""" Validacion de contrasena
+			
+		Metodo que valida que ambas contrasenas ingresadas sean igual, esto antes de ser encriptadas y guardadas en la base de datos, Retorna la contrasena valida.
+
+		Excepcoiones:
+		- ValidationError -- cuando las contrasenas no son iguales muetra un mensaje de error
+		"""	
+
+		password1 = self.cleaned_data.get['password1']
+		password2 = self.cleaned_data.get['password2']
+		if password1 and password2 and password1 != password2:
+			raise forms.ValidationError('Contrasenas no coinciden!')
+		return password2
