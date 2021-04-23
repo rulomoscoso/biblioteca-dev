@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from apps.usuarios.models imprt usuario
+from apps.usuarios.models import Usuario
 
 class FormularioLogin(AuthenticationForm):
 	def __init__(self, *args, **kwargs):
@@ -41,28 +41,28 @@ class FormularioUsuario(forms.ModelForm):
 		model = Usuario
 		fields = ('email', 'username', 'nombres', 'apellidos')
 		widgets = {
-			'email' = forms.EmailInput(
+			'email' : forms.EmailInput(
 					attrs = {
-						'class' = 'form-control',
-						'placeholder' = 'Correo Electronico'
+						'class' :'form-control',
+						'placeholder' : 'Correo Electronico'
 					}
 				),
-			'nombres' = forms.TextInput(
+			'nombres' : forms.TextInput(
 					attrs = {
-						'class' = 'form-control',
-						'placeholder' = 'Ingrese su nombre'
+						'class' : 'form-control',
+						'placeholder' : 'Ingrese su nombre'
 					}
 				),
-			'apellidos' = forms.TextInput(
+			'apellidos' : forms.TextInput(
 					attrs = {
-						'class' = 'form-control',
-						'placeholder' = 'Ingrese sus apellidos'
+						'class' : 'form-control',
+						'placeholder' : 'Ingrese sus apellidos'
 					}
 				),
-			'username' = forms.TextInput(
+			'username' : forms.TextInput(
 					attrs = {
-						'class' = 'form-control',
-						'placeholder' = 'Ingrese su nombre de usuario'
+						'class' : 'form-control',
+						'placeholder' : 'Ingrese su nombre de usuario'
 					}
 				)
 		}	
