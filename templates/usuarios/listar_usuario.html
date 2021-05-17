@@ -1,49 +1,41 @@
-{% extends 'index.html' %}
+  {% extends 'index.html' %}
 {% load static %}
 
 {% block titulo %}
   Biblioteca.dev | Listado de Usuarios
 {% endblock titulo %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
 {% block body %}
-  {% if object_list %}
+
       <div class="card">
           <div class="card-header">
               <strong class="card-title">Listado de Usuarios</strong>
           </div>
           <div class="table-stats order-table ov-h">
-              <table class="table">
+              <table id="tabla_usuarios" class="table">
                   <thead>
                       <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Username</th>
                         <th>Nombre</th>
                         <th>Apellidos</th>
+                        <th>Correo</th>
                         <th>Opciones</th>
                       </tr>
                   </thead>
                   <tbody>
-                    {% for usuario in object_list %}
-                      <tr>
-                        <td>{{ usuario.id }}</td>
-                        <td>{{ usuario.username }}</td>
-                        <td>{{ usuario.nombres}}</td>
-                        <td>{{ usuario.apellidos }}</td>
-                        <td>
-                          <button href="" class="btn btn-primary">Editar</button>
-                          <a href="" class="btn btn-danger">Eliminar</a>
-                        </td>
-                      </tr>
-                    {% endfor %}
+
                   </tbody>
               </table>
           </div>
       </div>
-      {% else %}
-        <h1>No existen Usuarios registrados</h1>
-      {% endif %}
 
 {% endblock body %}
 {% block extrajs %}
 <script src="{% static 'js/usuarios/index.js' %}"></script>
+<script src="{% static 'js/lib/data-table/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
 {% endblock extrajs%}
